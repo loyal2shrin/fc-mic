@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fc.tenant.service.mapper.TenantMapper">
+
+    <sql id="baseColumns">
+		 id, tenant_code, tenant_name, remark, create_user_code, create_time, update_user_code, update_time, is_delete, rec_ver
+	</sql>
+
+    <sql id="updateColumns">
+        <set>
+            <if test="tenantCode != null">
+                tenant_code = #{tenantCode},
+            </if>
+            <if test="tenantName != null">
+                tenant_name = #{tenantName},
+            </if>
+            <if test="remark != null">
+                remark = #{remark},
+            </if>
+            <if test="createUserCode != null">
+                create_user_code = #{createUserCode},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="updateUserCode != null">
+                update_user_code = #{updateUserCode},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="isDelete != null">
+                is_delete = #{isDelete},
+            </if>
+            <if test="recVer != null">
+                rec_ver = #{recVer},
+            </if>
+        </set>
+    </sql>
+
+    <sql id="whereClause">
+        <trim prefix="WHERE" prefixOverrides="AND">
+            <if test="id != null">
+                AND ${columnPrefix}id = #{id}
+            </if>
+            <if test="tenantCode != null">
+                AND ${columnPrefix}tenant_code = #{tenantCode}
+            </if>
+            <if test="tenantName != null">
+                AND ${columnPrefix}tenant_name = #{tenantName}
+            </if>
+            <if test="remark != null">
+                AND ${columnPrefix}remark = #{remark}
+            </if>
+            <if test="createUserCode != null">
+                AND ${columnPrefix}create_user_code = #{createUserCode}
+            </if>
+            <if test="createTime != null">
+                AND ${columnPrefix}create_time = #{createTime}
+            </if>
+            <if test="updateUserCode != null">
+                AND ${columnPrefix}update_user_code = #{updateUserCode}
+            </if>
+            <if test="updateTime != null">
+                AND ${columnPrefix}update_time = #{updateTime}
+            </if>
+            <if test="isDelete != null">
+                AND ${columnPrefix}is_delete = #{isDelete}
+            </if>
+            <if test="recVer != null">
+                AND ${columnPrefix}rec_ver = #{recVer}
+            </if>
+        </trim>
+    </sql>
+
+    <insert id="save" parameterType="com.fc.tenant.bean.domain.Tenant" useGeneratedKeys="true" keyProperty="id">
+		insert into t_tenant
+		( tenant_code, tenant_name, remark, create_user_code, create_time, update_user_code, update_time, is_delete, rec_ver)
+         values
+        (
+          #{tenantCode},
+          #{tenantName},
+          #{remark},
+          #{createUserCode},
+          #{createTime},
+          #{updateUserCode},
+          #{updateTime},
+          #{isDelete},
+          #{recVer}
+        )
+	</insert>
+
+    <delete id="deleteById" parameterType="com.fc.tenant.bean.domain.Tenant">
+		DELETE FROM t_tenant WHERE id = #{id}
+	</delete>
+
+    <update id="updateById" parameterType="com.fc.tenant.bean.domain.Tenant">
+        update t_tenant
+        <include refid="updateColumns"/>
+        where id = #{id}
+    </update>
+
+    <select id="selectById" resultType="com.fc.tenant.bean.domain.Tenant">
+        SELECT
+        <include refid="baseColumns"/>
+        FROM t_tenant
+        WHERE id = #{id}
+    </select>
+
+    <select id="selectOne" resultType="com.fc.tenant.bean.domain.Tenant"
+            parameterType="com.fc.tenant.bean.domain.Tenant">
+        SELECT
+        <include refid="baseColumns"/>
+        FROM t_tenant
+        <include refid="whereClause">
+            <property name="columnPrefix" value=""/>
+        </include>
+    </select>
+
+    <select id="selectByIndexCount" parameterType="com.fc.tenant.bean.domain.Tenant" resultType="int">
+        SELECT count(1)
+        FROM t_tenant
+        <include refid="whereClause">
+            <property name="columnPrefix" value=""/>
+        </include>
+    </select>
+
+    <select id="selectByIndex" parameterType="com.fc.tenant.bean.domain.Tenant"
+            resultType="com.fc.tenant.bean.domain.Tenant">
+        SELECT
+        <include refid="baseColumns"/>
+        FROM t_tenant
+        <include refid="whereClause">
+            <property name="columnPrefix" value=""/>
+        </include>
+        ORDER BY ${orderBy} ${orderByType}
+        LIMIT #{limit} OFFSET #{offset}
+    </select>
+</mapper>
