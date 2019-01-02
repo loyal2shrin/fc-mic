@@ -9,7 +9,7 @@ spring:
       server:
         bootstrap: true
         git:
-          uri:
+          uri: https://github.com/loyal2shrin/fc-mic.git
           search-paths: config
           username: 295905057@qq.com
           password: *********
