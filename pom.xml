@@ -19,6 +19,7 @@
         <module>fc-mic-lock</module>
         <module>fc-mic-tenant</module>
         <module>fc-mic-core</module>
+        <module>fc-mic-config</module>
     </modules>
 
     <parent>
