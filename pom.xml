@@ -20,6 +20,9 @@
         <module>fc-mic-tenant</module>
         <module>fc-mic-core</module>
         <module>fc-mic-config</module>
+        <module>fc-mic-consumer</module>
+        <module>fc-mic-api</module>
+        <module>fc-mic-provider</module>
     </modules>
 
     <parent>

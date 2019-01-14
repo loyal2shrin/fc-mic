@@ -1,0 +1,36 @@
+server:
+  port: 9033
+spring:
+  application:
+    name: fc-mic-provider
+  datasource:
+      url: jdbc:mysql://127.0.0.1:3306/tenant_test?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+      username: root
+      password: mysql
+      driver-class-name: com.mysql.jdbc.Driver
+
+mybatis:
+  mapper-locations: classpath*:mapper/*Mapper.xml
+
+dubbo:
+  application:
+    name: fc-mic-provider    #服务名称
+  registry:
+    protocol: zookeeper #注册中心地址
+    address: 172.31.57.77:2181,172.31.57.78:2181,172.31.57.79:2181
+    id: lin-registry-1
+  protocol:
+    name: dubbo    #dubbo 协议
+    port: 20883
+  scan: com.fc.provider.service     #声明需要暴露的服务接口
+
+eureka:
+  client:
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8081/eureka
+    instance:
+      lease-renewal-interval-in-seconds: 10
+
+logging:
+  config: classpath:logback-spring.xml

@@ -1,0 +1,33 @@
+server:
+  port: 9021
+spring:
+  application:
+    name: fc-mic-consumer
+  cloud:
+    config:
+      label: master
+      discovery:
+        enabled: true
+        service-id: FC-MIC-CONFIG
+      uri: http://127.0.0.1:9010/
+      profile: dev
+
+dubbo:
+  application:
+    name: fc-mic-consumer    #消费者名称
+  registry:
+    protocol: zookeeper #注册中心地址
+    address: 172.31.57.77:2181,172.31.57.78:2181,172.31.57.79:2181
+    id: lin-registry-1
+  protocol:
+    name: dubbo    #dubbo 协议
+  consumer:
+    timeout: 5000 #调用服务的超时时间　
+
+eureka:
+  client:
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8081/eureka
+    instance:
+      lease-renewal-interval-in-seconds: 10
