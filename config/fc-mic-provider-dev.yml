@@ -12,7 +12,7 @@ spring:
     protocol:
       name: dubbo    #dubbo 协议
       port: 20880
-    scan: com.fc.tenant.service     #声明需要暴露的服务接口
+    scan: com.fc.provider.service     #声明需要暴露的服务接口
 
 mybatis:
   mapper-locations: classpath*:mapper/*Mapper.xml
