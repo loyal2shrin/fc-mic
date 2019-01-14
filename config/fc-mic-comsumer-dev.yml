@@ -7,3 +7,5 @@ dubbo:
     id: lin-registry-1
   protocol:
     name: dubbo    #dubbo 协议
+  consumer:  #调用服务的超时时间
+    timeout: 5000　
