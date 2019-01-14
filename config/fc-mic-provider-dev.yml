@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/tenant_test?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    username: root
+    password: mysql
+    driver-class-name: com.mysql.jdbc.Driver
+  dubbo:
+    application:
+      name: provider    --服务名称
+    registry:
+      address: zookeeper://172.31.57.77:2181   -- 注册中心地址
+    protocol:
+      name: dubbo     -- dubbo 协议
+      port: 20880
+    scan: com.fc.tenant.service     --声明需要暴露的服务接口
+
+mybatis:
+  mapper-locations: classpath*:mapper/*Mapper.xml
